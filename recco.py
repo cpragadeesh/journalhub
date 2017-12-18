@@ -3,8 +3,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import copy
 import operator
-import json
-import numpy as np
 
 conn = MongoClient('mongodb://venkat:mongo@DESKTOP-B9O8E12:27017/hub')
 
@@ -24,7 +22,7 @@ class recco():
         self.score = None
         self.vector = None
         self.alphababy = {}
-        self.betababy = []
+        self.betababy = {}
         self.output = []
         
         self.totalUserPubs = 0
