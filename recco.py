@@ -23,6 +23,8 @@ class recco():
         self.vector = None
         self.alphababy = {}
         self.betababy = {}
+        self.accuracyset = []
+        self.diversityset = []
         self.output = []
         
         self.totalUserPubs = 0
@@ -57,10 +59,12 @@ class recco():
         return index
 
     def firstset(self, userpubs):
-        for k in range(0, len(userpubs)):
-            self.score = cosine_similarity(self.vector, self.vector[k])     #Need to do +=
-        #Please fix this
+        for k in range(len(userpubs)):
+            tmp = cosine_similarity(self.vector, self.vector[k])
+            self.score = list(map(operator.add, self.score, tmp))
+        
         #self.score = self.score / len(userpubs)
+        #Need to divide
         
         index = self.bestfit(20+self.totalUserPubs, self.score, 0)
         del index[:self.totalUserPubs]
@@ -115,6 +119,23 @@ class recco():
         self.prerequisite(pubs)
         self.firstset(pubs)
         self.secondset()
+
+        #Top 5 of both sets randomly
+        #Accuracy Set
+        for paper in self.alphababy:
+            self.accuracyset.append(paper)
+
+        self.accuracyset = self.accuracyset[0:5]
+        print('\nAccuracy Set')
+        print(self.accuracyset)
+
+        #Diversity Set
+        for paper in self.betababy:
+            self.diversityset.append(paper)
+
+        self.diversityset = self.diversityset[0:5]
+        print('\nDiversity Set')
+        print(self.diversityset)
 
 R = recco()
 pubs = {'cloud computing is beautifull', 'Phishing is great'}
