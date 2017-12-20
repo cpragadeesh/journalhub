@@ -54,7 +54,7 @@ class recco():
         
         for j in range(c):
             i, value = max(enumerate(fit), key=operator.itemgetter(1))
-            if i != skip:
+            if i not in skip:
                 index.append(i)
             fit[i] = -1
 
@@ -68,8 +68,8 @@ class recco():
         #self.score = self.score / len(userpubs)
         #Need to divide
         
-        index = self.bestfit(20+self.totalUserPubs, self.score, 0)
-        del index[:self.totalUserPubs]
+        index = self.bestfit(20+self.totalUserPubs, self.score, [0,1])
+        #del index[:self.totalUserPubs]
         #print(index)
         
         print('\nFirst Set:\n')
@@ -80,21 +80,21 @@ class recco():
         
         #print(self.alphababy) 
          
-    def worstfit(self, c, sett, skip=None):  
+    def worstfit(self, c, sett, skip=[]):  
         fit = copy.deepcopy(sett)
 
         index = []
 
         for j in range(c):
             i, value = min(enumerate(fit), key=operator.itemgetter(1))
-            if i != skip:
+            if i not in skip:
                 index.append(i)
             fit[i] = 2
 
         return index
 
     def secondset(self):
-        index = self.worstfit(20, self.score, 0)
+        index = self.worstfit(20, self.score)
         #print(len(index))
         
         print('\nSecond Set:\n')
