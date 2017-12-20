@@ -18,6 +18,8 @@ class recco():
         self.keywords = {}
         self.year = {}
         self.link = {}
+        self.headauthor = {}
+        self.journalpublisher = {}
 
         self.score = None
         self.vector = None
@@ -113,6 +115,8 @@ class recco():
                 self.keywords[paper['title']] = paper['keywords']
                 self.year[paper['title']] = paper['year']
                 self.link[paper['title']] = paper['link']
+                self.headauthor[paper['title']] = paper['author']
+                self.journalpublisher[paper['title']] = paper['journal']
 
         print('Selected '+ str(len(R.link)) +' links')
         print('Selected '+ str(len(pubs)) +' user publications')

@@ -8,8 +8,8 @@ class OJ:
         self.abstract = {}
         self.year = {}
         self.keywords = {}
-        #self.journal = {}
-        #self.author = {}
+        self.journal = {}
+        self.author = {}
         self.link = {}
 
     def retriever(self, api):
@@ -30,8 +30,8 @@ class OJ:
                 self.link[title] = bibjson['link']
                 self.abstract[title] = str(bibjson['abstract'].encode('utf-8'))
 
-                #self.journal = bibjson['journal']                
-                #self.author = bibjson['author']
+                self.journal[title] = str(bibjson['journal']['publisher'].encode('utf-8'))
+                self.author[title] = str(bibjson['author'][0]['name'].encode('utf-8'))
 
                 self.year[title] = bibjson['year']
                 self.keywords[title] = []
@@ -51,3 +51,4 @@ if __name__ == '__main__':
     api = doaj + query
     D = OJ()
     D.retriever(api)
+    #print(len(D.author))

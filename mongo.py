@@ -28,7 +28,9 @@ for topic in topiclist:
                         'abstract': D.abstract[title],
                         'keywords': D.keywords[title],
                         'link': D.link[title],
-                        'year': D.year[title]
+                        'year': D.year[title],
+                        'author': D.author[title],
+                        'journal': D.journal[title]
                     }
             papers.insert_one(insertJSON)            
         except:
