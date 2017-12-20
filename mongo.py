@@ -2,7 +2,7 @@ from doaj.retriever import OJ
 from arxiv.arxiv_extractor import extract_from_arxiv
 from pymongo import MongoClient
 
-conn = MongoClient('mongodb://venkat:mongo@DESKTOP-B9O8E12:27017/hub')
+conn = MongoClient('mongodb://Gautam:1234@Lenovo-PC/hub')
 
 db = conn.hub   #MongoDB Connection
 

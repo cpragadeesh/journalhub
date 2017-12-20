@@ -4,7 +4,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import copy
 import operator
 
-conn = MongoClient('mongodb://venkat:mongo@DESKTOP-B9O8E12:27017/hub')
+conn = MongoClient('mongodb://Gautam:1234@Lenovo-PC/hub')
 
 db = conn.hub   #MongoDB Connection
 
