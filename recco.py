@@ -67,9 +67,11 @@ class recco():
         
         #self.score = self.score / len(userpubs)
         #Need to divide
+
+        del self.score[:self.totalUserPubs]
+        #print(self.score)
         
-        index = self.bestfit(20+self.totalUserPubs, self.score, [0,1])
-        #del index[:self.totalUserPubs]
+        index = self.bestfit(20+self.totalUserPubs, self.score, [])
         #print(index)
         
         print('\nFirst Set:\n')
@@ -118,7 +120,7 @@ class recco():
                 self.headauthor[paper['title']] = paper['author']
                 self.journalpublisher[paper['title']] = paper['journal']
 
-        print('Selected '+ str(len(R.link)) +' links')
+        print('Selected '+ str(len(self.link)) +' links')
         print('Selected '+ str(len(pubs)) +' user publications')
         self.prerequisite(pubs)
         self.firstset(pubs)

@@ -9,8 +9,6 @@ db = conn.hub   #MongoDB Connection
 topics = db.topics
 topiclist = topics.find()
 
-D = OJ()    #DOAJ
-
 def fetch(topic):
     doaj = 'http://doaj.org/api/v1/'
     query = 'search/articles/'+topic+'?page=1&pageSize=100&sort=year%3Adesc'
@@ -18,6 +16,8 @@ def fetch(topic):
     D.retriever(api)
 
 for topic in topiclist:
+    D = OJ()    #DOAJ
+
     print(topic['topic'])
     fetch(topic['topic'].replace(' ', '%20'))
 
@@ -32,6 +32,8 @@ for topic in topiclist:
                         'author': D.author[title],
                         'journal': D.journal[title]
                     }
-            papers.insert_one(insertJSON)            
+            papers.insert_one(insertJSON)     
         except:
             continue
+    
+    del D
