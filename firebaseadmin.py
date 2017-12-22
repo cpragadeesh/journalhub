@@ -32,11 +32,12 @@ for user in people:
     if not os.path.exists('firebase-storage/'+user['uid']):
         os.makedirs('firebase-storage/'+user['uid'])
 
+    #storage.child('EgtsZpR6L0Rm53dXVsBDI5shn843/pele1.jpeg').download('pele1.jpeg')
     #storage.child('/'+user['uid']+'/').download('firebase-storage/'+user['uid']+'/')
     
 
 # Remember: Go to https://console.cloud.google.com/iam-admin/iam/project?project=journal-hub-50781
-# Give "Stirage Admin" role to firebase sdk for firebase storage bucket access 
+# Give "Storage Admin" role to firebase sdk for firebase storage bucket access 
 
 import firebase_admin
 from firebase_admin import credentials
