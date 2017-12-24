@@ -11,6 +11,8 @@ db = conn.hub   #MongoDB Connection
 data = db.data
 topiclist = data.find()
 
+publications = db.pubs
+
 class recco():
     def __init__(self):
         self.titles = []
@@ -144,10 +146,17 @@ class recco():
         print('\nDiversity Set')
         print(self.diversityset)
 
-pubs = {'cloud computing is beautifull', 'Phishing is great'}
+#pubs = {'cloud computing is beautifull', 'Phishing is great'}
 
-for topic in topiclist:
+users = db.users.find()
+
+for user in users:
     R = recco()
-    print('\n'+topic['_id']+'\n')
-    R.selection(pubs, topic['keys'])
+    print('\n'+user['_id']+'\n')
+
+    topiclist = data.find_one(user['_id'])
+    pubslist = publications.find_one(user['_id'])
+    pubs = pubslist['abstracts']
+
+    R.selection(pubs, topiclist['keys'])
     del R
