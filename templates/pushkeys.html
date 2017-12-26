@@ -1,0 +1,16 @@
+<form action = "{{ url_for('keys') }}" method = "POST">
+    <div id="searchbox">
+        <div id="content">
+            <h1>Journal Hub</h1>
+            <p>An <span>Amrita</span> Application</p>
+        </div>
+            
+        <div id="content">
+            <input type="text" name="keywords" id="keywords" placeholder="Selected Keywords"><br>
+            <input type="text" name="search" id="search" onkeyup="options(this.value)" placeholder="Select Keywords" 
+                autocomplete="off" autofocus>
+            <div id="results"></div>
+            <input type="submit" id="push" value="Push">
+        </div>                    
+    </div>   
+</form>   

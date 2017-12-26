@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <body>  
+        <table>
+            {% for row in rows %}
+            <tr>
+                <th>{{ row }}:</th>
+                <td>{{ rows[row] }}</td>
+            </tr>
+            {% endfor %}
+        </table>  
+        <a href="/userdata">Go to Settings Page</a>
+    </body>
+</html>

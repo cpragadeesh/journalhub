@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>    
+    <body>              
+        {% for row in rows %}
+        <div id="paper">
+            <div id="title">
+                <h4>{{ row['title'] }}</h4>
+            </div>
+            <div id="abstract">
+                <h4>Abstract:</h4>
+                <p>{{ row['abstract'] }}</p>
+            </div>        
+            <div id="keywords">
+                <h4>Keywords:</h4>
+                <p>{{ row['keywords'] }}</p>
+            </div>
+            <div id="year">
+                <h4>Year:</h4>
+                <p>{{ row['year'] }}</p>
+            </div>
+            <div id="link">
+                <h4>Link:</h4>
+                <p>{{ row['link'] }}</p>
+            </div>
+            <div id="author">
+                <h4>Lead Author:</h4>
+                <p>{{ row['leadauthor'] }}</p>
+            </div>
+            <div id="publisher">
+                <h4>Publisher:</h4>
+                <p>{{ row['publisher'] }}</p>
+            </div>            
+        </div>
+        {% endfor %}
+ 
+    </body>
+    <style>
+    html, body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+    #paper {
+        background-color: rgb(253, 241, 74);
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+    }
+    #title {
+        text-align: center;
+    }
+    </style>
+</html>
