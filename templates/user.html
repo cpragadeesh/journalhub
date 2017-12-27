@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <body> 
+        <form action = "{{ url_for('add') }}" method = "POST">
+            <input type="text" name="name" placeholder="Enter Name">          
+            <input type="number" name="age" placeholder="Enter Age">         
+            <input type="number" name="phone" placeholder="Enter Mobile No.">
+            <input type="email" name="email" placeholder="Enter Email">         
+            <input type="password" name="password" placeholder="Enter Password">
+            <input type="submit" value="Submit">
+        </form>      
+    </body>
+
+    <style>
+        .register {
+            min-height: 450px;
+            width: 100%;
+
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #0067AF;
+        }
+        .register #content {
+            min-width: 300px;
+            font-size: 90%;
+            margin: 5px;
+
+            color: #CCE1E5;
+            text-align: center;
+        }
+        .register #content h1 {
+            max-width: 360px;
+            display: block;
+            margin: auto;
+            padding: 5px;
+            border-bottom: 1px solid #4D95C7;
+        }
+        .register #content form {
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+        }
+        .register #content input[type="text"], .register #content input[type="number"], 
+            .register #content input[type="password"], .register #content input[type="email"] {
+            background-color: #267EBB;
+            padding: 10px;
+            margin: 5px;
+            width: 300px;
+            border: 1px solid white;
+            border-radius: 5px;
+            outline: none;
+            color: white;
+        }
+        .register #content input[type="submit"] {
+            background-color: white;
+            padding: 10px;
+            margin: 5px;
+            width: 280px;
+            border: 0;
+            cursor: pointer;
+            border-radius: 5px;
+            color: #267EBB;
+            outline: none;
+        }
+        .register #content a {
+            color: white;
+        }
+        .register #content > div {
+            margin: 20px;
+        }
+    </style>
+</html>

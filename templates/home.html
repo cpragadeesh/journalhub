@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div id="top">
+        <button id="home">Home</button>
+        <button id="signup">Sign Up</button>
+    </div>
+    <div class="container">
+        <div id="content">
+            <h1>Journal Hub</h1>
+            <p>An <span>Amrita</span> Application</p>
+        </div>
+        <div id="content">
+            {% block login %}
+            {% include 'login.html' %}
+            {% endblock %}
+        </div>
+    </div>
+    <div class="who">
+        <div id="content">
+            <h1>About Us</h1>
+            <p>We fetch our articles from the best journals</p>
+            <p>Our system uses Genetic Algorithm to learn and serve you better</p>
+        </div>
+    </div>
+    <div class="stuff">
+        <div id="content">
+            <h1>Top Research Topics</h1>
+            <div id="grid">
+                <div id="grid-content">
+                    <!--
+                    <img src="{{ url_for('static', filename='iot-min.png') }}">
+                    -->
+                    <img src="http://www.icslab.eu/images/posts/hotrest/iot.png">
+                    <h4>IoT & IoE</h4>
+                </div>
+                <div id="grid-content">
+                    <!--
+                    <img src="{{ url_for('static', filename='machine-learning-min.jpg') }}">
+                    -->
+                    <img src="https://www.pouted.com/wp-content/uploads/2015/07/Machine-Learning-930x521.jpg">
+                    <h4>Machine Learning</h4>
+                </div>
+                <div id="grid-content">
+                    <!--
+                    <img src="{{ url_for('static', filename='thocp-min.png') }}">
+                    -->
+                    <img src="http://www.icslab.eu/images/posts/hotrest/thocp.png">
+                    <h4>Neural Networks</h4>
+                </div>
+                <div id="grid-content">
+                    <!--
+                    <img src="{{ url_for('static', filename='sec-min.png') }}">
+                    -->
+                    <img src="http://www.icslab.eu/images/posts/hotrest/sec.png">
+                    <h4>Security</h4>
+                </div>
+                <div id="grid-content">
+                    <!--
+                    <img src="{{ url_for('static', filename='virtvision-min.png') }}">
+                    -->
+                    <img src="https://www.pouted.com/wp-content/uploads/2015/07/ARTICLE-Virtualization.jpg">
+                    <h4>Virtualization</h4>
+                </div>
+                <div id="grid-content">
+                    <!--
+                    <img src="{{ url_for('static', filename='bigdata-min.png') }}">
+                    -->
+                    <img src="http://www.icslab.eu/images/posts/hotrest/bigdata.png">
+                    <h4>Big Data</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="communicate">
+        <div id="content">
+            <h1>Communication</h1>
+            <div>
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
+    <div class="register">
+        <div id="content">
+            <h1>Notification</h1>
+            <div>
+                <p>To see exclusive content about upcoming adventures</p>
+                {% block register %}
+                    {% include 'user.html' %}
+                {% endblock %}
+                <p>Top Research Topics is still under development, so sign up to be notified of the launch!</p>
+                <a href="">Learn more about the stuff</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <a href="">Other Productions</a>
+        <a href="">Email Articles & Notes</a>
+        <p>&copy; Copyright 2017</p>
+    </div>
+{% endblock %}

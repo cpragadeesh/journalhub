@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <body> 
+        <div class="login">
+            <div id="content">
+                <h2>Control Panel</h2>      
+                <form action = "{{ url_for('check') }}" method = "POST">
+                    <input type="email" name="email" placeholder="Enter Email">                 
+                    <input type="password" name="password" placeholder="Enter Password">
+                    <input type="submit" value="Login">
+                </form> 
+            </div>
+        </div>
+        
+        <style>
+            .login {
+                height: 60%;
+                min-height: 300px;
+                width: 100%;
+                
+                display: flex;
+                display: -webkit-flex;
+                justify-content: center;
+                align-items: center;
+                
+                /*background-color: white;*/
+            }
+                
+            .login #content {
+                min-width: 300px;
+                font-size: 80%;
+                margin: 5px;
+            }
+            .login #content h2 {
+                padding: 5px;
+                border-bottom: 1px solid #F9EC31;
+            }
+
+            .login #content form {
+                display: flex;
+                display: -webkit-flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: column;
+            }
+            .login #content input[type="email"], .login #content input[type="password"] {
+                background-color: white;
+                padding: 10px;
+                margin: 5px;
+                width: 300px;
+                border: 0;
+                border-radius: 5px;
+                outline: none;
+                color: black;
+            }
+            .login #content input[type="submit"] {
+                background-color: black;
+                padding: 10px;
+                margin: 5px;
+                width: 280px;
+                border: 0;
+                cursor: pointer;
+                border-radius: 5px;
+                color: white;
+            }
+        </style>                
+    </body>
+</html>
