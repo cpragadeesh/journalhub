@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Profile</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('.container h1').addClass('animated zoomIn');
+                $('#top button').show().addClass('animated slideInUp');
+        
+                $('#home').on('click', function() {
+                    $('.container').addClass('animated flash');
+                });
+
+                $('#pi').on('click', function() {
+                    $('html, body').animate({ scrollTop: $('.userinfo').position().top }, 1500);
+                });
+                $('#s').on('click', function() {
+                    $('html, body').animate({ scrollTop: $('.userstats').position().top }, 1500);
+                });
+                $('#k').on('click', function() {
+                    $('html, body').animate({ scrollTop: $('.userkeys').position().top }, 1500);
+                });
+                $('#p').on('click', function() {
+                    $('html, body').animate({ scrollTop: $('.userpubs').position().top }, 1500);
+                });
+                $('#la').on('click', function() {
+                    $('html, body').animate({ scrollTop: $('.userlikes').position().top }, 1500);
+                });
+                $('#da').on('click', function() {
+                    $('html, body').animate({ scrollTop: $('.userdislikes').position().top }, 1500);
+                });
+            });
+        </script>
+    </head>
+    <body> 
+        <div id="top">
+            <button id="home">Home</button>
+            <button id="pi">Personal Info</button>
+            <button id="s">Stats</button>
+            <button id="k">Keywords</button>
+            <button id="p">Publications</button>
+            <button id="la">Liked Articles</button>
+            <button id="da">Disliked Articles</button>
+            <button id="signout" onclick="window.location = '/logout'">Signout</button>
+        </div>
+        
+        <div class="container">
+            <div id="content">
+                <h1>Journal Hub</h1>
+                <p>An <span>Amrita</span> Application</p>
+            </div>
+        </div>
+
+        <div class="userinfo">
+            <h1>My Profile</h1>
+            <div id="info">
+                <table>
+                    {% for row in rows %}
+                    <tr>
+                        <th>{{ row }}:</th>
+                        <td>{{ rows[row] }}</td>
+                    </tr>
+                    {% else %}
+                        <td>No entries so far</td>
+                    {% endfor %}
+                </table>  
+                <a href="/userdata">Go to Settings Page</a>
+            </div>        
+        </div>         
+
+        <div class="userstats">
+            <h1>Stats</h1>
+            <div id="stats">
+                {% for row in stats %}                    
+                    <p><strong>{{ row }}:</strong> {{ stats[row] }}</p>
+                {% else %}
+                    <p>No entries so far</p>
+                {% endfor %}        
+            </div>  
+        </div>
+
+        <div class="userkeys">
+            <h1>My Keywords</h1>
+            <div id="keys">
+                {% for row in keys %}
+                    <p>{{ row }}</p>
+                {% else %}
+                    <p>No entries so far</p>
+                {% endfor %}      
+            </div>  
+        </div>
+    
+
+        <div class="userpubs">
+            <h1>My Abstracts</h1>
+            <div id="pubs">
+                {% for row in pubs %}
+                    <p>{{ row }}</p>
+                {% else %}
+                    <p>No entries so far</p>
+                {% endfor %}
+            </div>  
+        </div>
+
+        <div class="userlikes">
+            <h1>My Liked Papers</h1>
+            <div id="liked">
+                {% for row in likes %}
+                    <h3>{{ row['title'] }}</h3>                
+                    <p>{{ row['abstract'] }}</p>
+                    <ul>
+                    {% for key in row['keywords'] %}
+                        <li>{{ key }}</li>
+                    {% endfor %}
+                    </ul>
+                    <a href="{{ row['link'][0]['url'] }}">{{ row['link'][0]['type'] }}</a>
+                    <p>{{ row['year'] }}</p>          
+                    <p>{{ row['publisher'] }}</p>
+                    <p>{{ row['leadauthor'] }}</p>
+                {% else %}
+                    <p>No entries so far</p>
+                {% endfor %}
+            </div>  
+        </div>
+
+        <div class="userdislikes">
+            <h1>My Disliked Papers</h1>
+            <div id="disliked">
+                {% for row in dislikes %}
+                    <h3>{{ row['title'] }}</h3>                
+                    <p>{{ row['abstract'] }}</p>
+                    <ul>
+                    {% for key in row['keywords'] %}
+                        <li>{{ key }}</li>
+                    {% endfor %}
+                    </ul>
+                    <a href="{{ row['link'][0]['url'] }}">{{ row['link'][0]['type'] }}</a>
+                    <p>{{ row['year'] }}</p>          
+                    <p>{{ row['publisher'] }}</p>
+                    <p>{{ row['leadauthor'] }}</p>
+                {% else %}
+                    <p>No entries so far</p>
+                {% endfor %}
+            </div>  
+        </div>
+    </body>
+
+    <style>
+    html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+        font-family: "Times New Roman", Georgia, Serif;
+    }
+
+    body::-webkit-scrollbar {
+        width: 10px;
+    }
+    body::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    } 
+    body::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
+    }
+
+    #top {
+        background: #FF4136;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        height: auto;
+    }
+    #top button {
+        display: none;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        padding: 5px;
+        margin: 5px;
+        outline: none;
+    }        
+
+    h1 {
+        font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+    h2 {
+        font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+    p {
+        font-family: Verdana, Geneva, sans-serif;
+    }
+    span {
+        font-family: "Courier New", Courier, monospace;
+        cursor: pointer;
+    }
+
+    .container {
+        height: 80%;
+        min-height: 500px;
+        width: 100%;
+
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        background-color: #FF4136;
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    }
+
+    .userinfo {
+        height: 60%;
+        min-height: 300px;
+        width: 100%;
+
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        background-color: white;
+    }
+    .userinfo h1 {
+        padding: 5px;
+        border-bottom: 1px solid #F9EC31;
+    }
+    .userinfo table, td, th {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    .userstats {
+        height: 60%;
+        min-height: 300px;
+        width: 100%;
+
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        background-color: #F5F5F5;
+        clip-path: ellipse(100%);
+        -webkit-clip-path: ellipse(100%);
+    }
+    .userstats h1 {
+        padding: 5px;
+        border-bottom: 1px solid #F9EC31;
+    }
+
+    .userkeys {
+        height: 60%;
+        min-height: 300px;
+        width: 100%;
+
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        background-color: white;
+    }
+    .userkeys #keys {
+        min-width: 300px;
+        font-size: 90%;
+        margin: 10px;
+    }
+    .userkeys h1 {
+        padding: 5px;
+        border-bottom: 1px solid #F9EC31;
+    }
+
+    .userpubs {
+        min-height: 500px;
+        height: auto;
+        width: 100%;
+
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        background-color: rgba(255, 188, 44, 0.788);
+    }
+    .userpubs #pubs {
+        min-width: 300px;
+        font-size: 90%;
+        margin: 10px;
+    }
+    .userpubs h1 {
+        padding: 5px;
+        border-bottom: 1px solid #E84500;
+    }
+
+    .userlikes {
+        height: auto;
+        min-height: 500px;
+        width: 100%;
+
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        background-color: rgba(49, 172, 255, 0.788);
+    }
+    .userlikes #liked {
+        min-width: 300px;
+        font-size: 90%;
+        margin: 10px;
+    }
+    .userlikes h1 {
+        padding: 5px;
+        border-bottom: 1px solid #F9EC31;
+    }
+
+    .userdislikes {
+        height: auto;
+        min-height: 500px;
+        width: 100%;
+
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        background-color: rgba(255, 49, 118, 0.788);
+    }
+    .userdislikes #disliked {
+        min-width: 300px;
+        font-size: 90%;
+        margin: 10px;
+    }
+    .userdislikes h1 {
+        padding: 5px;
+        border-bottom: 1px solid #F9EC31;
+    }
+
+    @media screen and (max-width: 480px) {
+        #content {
+            font-family: "Times New Roman", Georgia, Serif;
+            text-align: center;
+    
+            margin: 0;
+        }
+
+        .userstats {                
+            clip-path: none;
+            -webkit-clip-path: none;
+        }
+    }
+
+    @media screen and (max-width: 835px) {
+        #content {
+            font-family: "Times New Roman", Georgia, Serif;
+            text-align: center;
+    
+            margin: 20px;
+        }  
+
+        .userstats {                
+            clip-path: none;
+            -webkit-clip-path: none;
+        }           
+    }
+    </style>
+</html>

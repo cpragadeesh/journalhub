@@ -1,0 +1,86 @@
+<form action = "{{ url_for('pubs') }}" method = "POST">
+    <div id="pubs">
+        <div id="content">
+            <h1>Uploaded Publications: </h1>            
+            <input type="file" value="upload" name="files" id="filebutton" multiple>    
+            <textarea type="text" name="abstracts" id="abstracts" style="display:none;"></textarea>            
+            <input type="hidden" name="keywords" id="keywords" value="">
+            <p id="loading">Loading..</p>
+            <input type="submit" value="Save">
+        </div>
+    </div>
+</form>
+
+<script>        
+    var filebutton = document.getElementById('filebutton');
+
+    var ipabs = document.getElementById('abstracts');
+    var ipkeys = document.getElementById('keywords');
+
+    filebutton.addEventListener('change', function(e) {
+        var i = 0;
+
+        var abstract = '';
+        var keywords = '';
+
+        for (i = 0; i < e.target.files.length; i++) {
+            var __PDF_DOC,
+            __CURRENT_PAGE,
+            __TOTAL_PAGES,
+            __PAGE_RENDERING_IN_PROGRESS = 0;
+
+            var file = e.target.files[i];     
+            
+            var link = URL.createObjectURL(file)
+
+            complete = 0;
+
+            PDFJS.getDocument({ url: link }).then(function(pdf) {
+                var total = pdf.numPages;        
+                var layers = {};   
+
+                pdf.getPage(1).then(function(page){
+                    var n = page.pageNumber;
+                    page.getTextContent().then(function(textContent){
+                        if (null != textContent.items) {
+                            var page_text = '';
+                            var last_block = null;
+
+                            for (var j=0; j<textContent.items.length; j++) {
+                                var block = textContent.items[j];
+                                if( last_block != null && last_block.str[last_block.str.length-1] != ' '){
+                                    if( block.x < last_block.x )
+                                        page_text += '\r\n'; 
+                                    else if ( last_block.y != block.y && ( last_block.str.match(/^(\s?[a-zA-Z])$|^(.+\s[a-zA-Z])$/) == null ))
+                                        page_text += ' ';
+                                }
+                                page_text += block.str;
+                                last_block = block;
+                            }
+                            textContent != null && console.log("page " + n + " finished."); 
+                            layers[n] =  page_text + "\n\n";
+                        }
+                        //display.innerHTML = layers[n];
+                        
+                        var absRE = RegExp(/abstract.*?introduction|a b s t r a c t.*?introduction|.*?introduction|.*?keywords/i);
+                        abstract = absRE.exec(layers[n]);
+                        ipabs.value += abstract + '##overendl##';
+                        document.getElementById('loading').innerHTML = 'Ready to Save';
+
+                        var keyRE = RegExp(/keywords.*?introduction|keywords.*?,|index terms.*?introduction|index terms.*?,/i);
+                        keywords = keyRE.exec(layers[n]);
+                        
+                    }).catch(function(error) {
+                        alert(error.message);
+                    });
+
+                }).catch(function(error) {
+                    alert(error.message);
+                });
+
+            }).catch(function(error) {                
+                alert(error.message);
+            });
+        }            
+    }, false);    
+</script>
